@@ -28,11 +28,21 @@ file(WRITE "${CMAKE_BINARY_DIR}/include/GitCommitId.h" "#define GIT_COMMIT_ID \"
 
 option(ODIN2_COPY_PLUGIN_AFTER_BUILD "Copy JUCE Plugins after built" OFF)
 
+option(LV2_ONLY "Build plugin only as LV2" OFF)
+if(LV2_ONLY)
+  set(ODIN2_JUCE_FORMATS_OVERRIDE LV2 CACHE STRING "JUCE plugin formats")
+  set(ODIN2_SKIP_CLAP ON CACHE BOOL "Don't build CLAP")
+endif()
+
 # ==================== Add Plugin =======================
 # Build LV2 only on Linux
 set(JUCE_FORMATS AU VST3 Standalone)
 if(UNIX AND NOT APPLE)
     list(APPEND JUCE_FORMATS LV2)
+endif()
+
+if(ODIN2_JUCE_FORMATS_OVERRIDE)
+  set(JUCE_FORMATS ${ODIN2_JUCE_FORMATS_OVERRIDE})
 endif()
 
 juce_add_plugin(Odin2
@@ -51,9 +61,11 @@ juce_add_plugin(Odin2
 )
 
 # ==================== CLAP =======================
-clap_juce_extensions_plugin(TARGET Odin2
-        CLAP_ID "com.thewavewarden.odin2"
-        CLAP_FEATURES instrument "virtual analog")
+if(NOT ODIN2_SKIP_CLAP)
+  clap_juce_extensions_plugin(TARGET Odin2
+          CLAP_ID "com.thewavewarden.odin2"
+          CLAP_FEATURES instrument "virtual analog")
+endif()
 
 # ==================== JUCE Defines =======================
 juce_generate_juce_header(Odin2)
