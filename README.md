@@ -3,10 +3,13 @@
 This fork of Odin 2 has the following changes:
 
 * The plugin is built with [a fork of JUCE] that includes fixes for IBM Power.
-* Added installation rules so the plugin can be installed with
-  `cmake --install` or `make install`.
 * In the [`lv2-only`] branch, added CMake option `LV2_ONLY` to build the plugin
   only as LV2.
+
+The following changes have since been merged upstream:
+
+* Added installation rules so the plugin can be installed with
+  `cmake --install` or `make install`.
 
 [a fork of JUCE]: https://github.com/poweraudio/lpp-juce
 [`lv2-only`]: https://github.com/poweraudio/odin2/tree/lv2-only
