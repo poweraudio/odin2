@@ -54,7 +54,6 @@ juce_add_plugin(Odin2
   COPY_PLUGIN_AFTER_BUILD ${ODIN2_COPY_PLUGIN_AFTER_BUILD}
   LV2_URI https://thewavewarden.com/odin2
   LV2_SHARED_LIBRARY_NAME Odin2
-  COPY_PLUGIN_AFTER_BUILD TRUE
 )
 
 # ==================== CLAP =======================
