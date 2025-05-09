@@ -5,6 +5,11 @@ This fork of Odin 2 has the following changes:
 * The plugin is built with [a fork of JUCE] that includes fixes for IBM Power.
 * In the [`lv2-only`] branch, added CMake option `LV2_ONLY` to build the plugin
   only as LV2.
+* The upstream project automatically copies the plugin to user directories
+  (~/.lv2, ~/.vst3, etc.) after building. In this fork, that behavior is off
+  by default so the plugin isn’t installed in two places if you’re planning to
+  run `cmake --install`. The upstream behavior can be enabled by passing
+  `-DODIN2_COPY_PLUGIN_AFTER_BUILD=ON` to `cmake`.
 
 The following changes have since been merged upstream:
 
